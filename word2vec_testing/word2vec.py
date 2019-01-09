@@ -7,7 +7,6 @@ import codecs
 import gensim
 
 f = open("corpus.txt",'r') #corpus
-d = codecs.open('corpus_processado.txt','w','utf-8')
 text = f.read()
 text = unicode(text,'utf-8','ignore')
 
@@ -21,4 +20,7 @@ input_word2vec = [[palavra.lower() for palavra in word_tokenize(sentenca) if pal
 model = gensim.models.Word2Vec(input_word2vec, size=30, window=10, min_count=2, workers=10) #passando parametros
 model.train(input_word2vec, total_examples=len(input_word2vec), epochs=10) #treinando o modelo
 
+f.close()
+
 print model.wv['igreja'] #testando
+print model.wv.similarity('homem','mulher')
