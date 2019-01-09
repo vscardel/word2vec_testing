@@ -2,7 +2,7 @@
 
 	$fila = array(); //fila que será usada na bfs
 
-	$myFile = fopen("/home/victor/crawler/corpus.txt","a");
+	$myFile = fopen("corpus.txt","a");
 
 	function get_links($pagina){ // funcao com expressao regular simples para coletar links
 
@@ -40,7 +40,7 @@
 		}
 	}
 
-	$txt = file_get_contents("https://pt.wikipedia.org/wiki/Galileu_Galilei"); //raiz
+	$txt = file_get_contents("https://pt.wikipedia.org/wiki/Johann_Sebastian_Bach"); //raiz
 	get_links($txt);
 	escreve_text_arquivo($txt);
 
@@ -48,7 +48,7 @@
 
 	$visitados = array();
 
-	while($cont <= 1000){ // itera no maximo sobre 10 links
+	while($cont <= 10000){ // itera no maximo sobre 10 links
 
 		$link_atual = array_shift($fila);
 
@@ -65,7 +65,7 @@
 		$cont++;
 	}
 
-	$destination = '/home/victor/crawler/corpus.zip';
+	$destination = 'corpus.zip';
 	$zip = new ZipArchive();
 	$zip->open($destination, ZipArchive::CREATE);
 	$zip->addFile("corpus.txt");
